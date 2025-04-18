@@ -44,13 +44,19 @@ chatbot_name=${chatbot_name:-"${project_name} AI"}
 read -p "Enter client URL (default: http://localhost:3000): " client_url
 client_url=${client_url:-http://localhost:3000}
 
+# Prompt for server URL
+read -p "Enter server URL (default: http://127.0.0.1:5000/): " server_url
+server_url=${server_url:-"http://127.0.0.1:5000/"}
+
 # Prompt for prompt generation URL
-read -p "Enter prompt generation URL (default: http://localhost:5000/api/chat/generate-prompt): " prompt_generation_url
-prompt_generation_url=${prompt_generation_url:-"http://localhost:5000/api/chat/generate-prompt"}
+read -p "Enter prompt generation URL (default: http://127.0.0.1:5000/api/generate-prompt): " prompt_generation_url
+prompt_generation_url=${prompt_generation_url:-"http://127.0.0.1:5000/api/generate-prompt"}
 
 # Prompt for API key
-read -p "Enter API key (default: sunshine-lollipops-gummybears-teardrops): " api_key
-api_key=${api_key:-"sunshine-lollipops-gummybears-teardrops"}
+read -p "Enter API key (leave blank to generate): " api_key
+if [ -z "$api_key" ]; then
+  api_key=$(openssl rand -hex 16)
+fi
 
 # Create the .env file
 cat > client/.env << EOF
@@ -62,10 +68,11 @@ NEXT_PUBLIC_PROJECT_NAME="${project_name}"
 NEXT_PUBLIC_CHATBOT_NAME="${chatbot_name}"
 
 NEXT_PUBLIC_CLIENT_URL="${client_url}"
-NEXT_PUBLIC_PROMPT_GENERATION_URL="${prompt_generation_url}"
+NEXT_PUBLIC_SERVER_URL="${server_url}"
+PROMPT_GENERATION_URL="${prompt_generation_url}"
 
 API_KEY='${api_key}'
 EOF
 
 echo "Client .env file has been generated successfully!"
-chmod +x scripts/generate_client_env.sh
+chmod +x scripts/create_client_env.sh
