@@ -1,6 +1,6 @@
 import { Message } from '@prisma/client';
 import { AxiosError } from 'axios';
-import { Orbit, Check, PencilLine, RefreshCcw, X } from 'lucide-react';
+import { Atom, Check, PencilLine, RefreshCcw, X } from 'lucide-react';
 import {
 	Dispatch,
 	SetStateAction,
@@ -256,7 +256,7 @@ export default function ChatBox({
 							key={`${message.id}`}
 						>
 							<div className='size-9 flex items-center justify-center bg-zinc-800 text-white rounded-full'>
-								<Orbit size={18} />
+								<Atom size={18} />
 							</div>
 							<div className="flex flex-col items-start gap-1">
 								<p className="text-xs pl-1">
@@ -275,7 +275,7 @@ export default function ChatBox({
 			{awaitingResponse && !awaitingMessage && (
 				<div className="grid grid-cols-[auto_1fr] gap-3 self-start w-3/4 max-w-[500px] items-end mt-3">
 					<div className='size-9 flex items-center justify-center bg-zinc-800 text-white rounded-full'>
-						<Orbit size={18} />
+						<Atom size={18} />
 					</div>
 					<div className="flex flex-col items-start">
 						<p className="text-xs pl-1">{process.env.NEXT_PUBLIC_CHATBOT_NAME}</p>

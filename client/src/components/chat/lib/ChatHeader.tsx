@@ -1,4 +1,4 @@
-import { Edit, Ellipsis, Info, Orbit, Send, Trash } from 'lucide-react';
+import { Edit, Ellipsis, Info, Atom, Send, Trash } from 'lucide-react';
 import { Dispatch, SetStateAction, useState } from 'react';
 
 import DeleteChatModal from '@/components/modals/DeleteChatModal';
@@ -24,7 +24,7 @@ export default function ChatHeader({ chat, setUser }: ChatHeaderProps) {
 			<Card className="py-2 px-4 bg-zinc-800 text-white !shadow-none">
 				<div className="flex flex-row justify-between items-center">
 					<div className="flex flex-row items-center gap-3">
-						<Orbit size={20} />
+						<Atom size={20} />
 						<h1>{chat.name}</h1>
 					</div>
 					<DropdownMenu>
