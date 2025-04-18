@@ -86,6 +86,7 @@ export default function DeleteChatModal({
 						variant='destructive'
 						disabled={loading}
 						onClick={handleDeleteChat}
+						className='text-white'
 					>
 						Delete
 					</Button>

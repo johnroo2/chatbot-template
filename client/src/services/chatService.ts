@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 
 import { Service } from '@/lib/serviceRoot';
 import { APIError, VISIBILITY } from '@/types/general';
-import { CreateChatResponse, DeleteChatResponse, EditChatResponse, GetChatResponse, GetPublicChatsResponse, GetSharedChatResponse } from '@/types/server';
+import { CreateChatResponse, DeleteChatResponse, EditChatResponse, GetChatResponse, GetPublicChatsResponse, GetSharedChatResponse, RegeneratePromptResponse, SendMessageResponse } from '@/types/server';
 
 class ChatService extends Service {
 	constructor(url: string) {
@@ -86,6 +86,36 @@ class ChatService extends Service {
 	async getPublicChats(): Promise<GetPublicChatsResponse | AxiosError<APIError>> {
 		return this.safeAxiosApply<GetPublicChatsResponse>(() =>
 			this.instance.get('/api/chat/get-public', this.applyHeaders())
+		)();
+	}
+
+	/**
+	 * Sends a message to the chat
+	 * @param {string} chatId The chat's id
+	 * @param {string} prompt The message to send
+	 * @returns {Promise<SendMessageResponse | AxiosError<APIError>>} The updated chat
+	 */
+	async sendMessage(chatId: string, prompt: string): Promise<SendMessageResponse | AxiosError<APIError>> {
+		return this.safeAxiosApply<SendMessageResponse>(() =>
+			this.instance.post('/api/chat/send-message', {
+				chatId,
+				prompt
+			}, this.applyHeaders())
+		)();
+	}
+
+	/**
+	 * Regenerates the prompt for the chat
+	 * @param {string} chatId The chat's id
+	 * @returns {Promise<RegeneratePromptResponse | AxiosError<APIError>>} The updated chat
+	 */
+	async regeneratePrompt(chatId: string, messageId: string, prompt: string): Promise<RegeneratePromptResponse | AxiosError<APIError>> {
+		return this.safeAxiosApply<RegeneratePromptResponse>(() =>
+			this.instance.post('/api/chat/regenerate-prompt', {
+				chatId,
+				messageId,
+				prompt
+			}, this.applyHeaders())
 		)();
 	}
 }

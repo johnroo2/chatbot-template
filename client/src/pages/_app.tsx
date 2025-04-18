@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/general.css';
+import 'katex/dist/katex.min.css';
 
 import { Home } from 'lucide-react';
 import { NextComponentType, NextPageContext } from 'next';

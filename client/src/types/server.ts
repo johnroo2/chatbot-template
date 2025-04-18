@@ -2,6 +2,21 @@ import { User } from '@prisma/client';
 
 import { PopulatedChat, PopulatedUser } from './populations';
 
+export interface ChatMessage {
+    role: 'user' | 'assistant' | 'system';
+    content: string;
+}
+
+export interface GeneratePromptRequest {
+    prompt: string;
+    api_key: string;
+    history: ChatMessage[];
+    message_id: string;
+    chat_id: string;
+    user_id: string;
+    username: string;
+}
+
 export type LoginResponse = {
     user: PopulatedUser,
     token: string
@@ -56,3 +71,9 @@ export type DeleteChatResponse = {
     user: PopulatedUser,
     chat: PopulatedChat
 }
+
+export type SendMessageResponse = {
+    chat: PopulatedChat
+}
+
+export type RegeneratePromptResponse = SendMessageResponse
